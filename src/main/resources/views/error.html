@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="navbar-header">
+        <a class="navbar-brand fst-italic fs-2 ps-5 ms-5" href="/">Home</a>
+    </div>
+    <div class="collapse navbar-collapse align-items-end" id="navbarText">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Page 1</a>
+            </li>
+            <!--			   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="${#strings.toUpperCase(#locale)}">...<span class="caret"></span></a>&ndash;&gt;&ndash;&gt;-->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Languages</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{?lang=en}">English</a></li>
+                    <li><a class="dropdown-item" th:href="@{?lang=de}">Deutsch</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Page 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Page 3</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<img src="/images/StudentsAtWork.jpg" alt="Caution! Students at work."/>
+<h1 th:text="${errorMessage}"></h1>
+<h2>But they are hopefully fixing the error <span style='font-size:30px;'>&#128514;</span></h2>
+<a href="/">Back to main page</a>
+</body>
+</html>

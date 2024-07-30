@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{student.caption.plural}"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="navbar-header">
+        <a class="navbar-brand fst-italic fs-2 ps-5 ms-5" href="/">Home</a>
+    </div>
+    <div class="collapse navbar-collapse align-items-end" id="navbarText">
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Page 1</a>
+            </li>
+            <!--			   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="${#strings.toUpperCase(#locale)}">...<span class="caret"></span></a>&ndash;&gt;&ndash;&gt;-->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Languages</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" th:href="@{?lang=en}">English</a></li>
+                    <li><a class="dropdown-item" th:href="@{?lang=de}">Deutsch</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Page 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Page 3</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+
+    <div th:replace="fragments/SchoolClass.html :: show(schoolClass=${schoolClass})"></div>
+    <div th:replace="fragments/Teacher.html :: show(teacher=${teacher})"></div>
+
+    <h2 th:text="#{student.caption.plural}"></h2>
+
+    <table class="table table-striped table-responsive-md">
+        <tr>
+            <th th:text="#{student.studentId}"></th>
+            <th th:text="#{student.surname}"></th>
+            <th th:text="#{student.firstname}"></th>
+            <th style="text-align:right" th:text="#{student.sex}"></th>
+            <th style="text-align:right" th:text="#{student.birthDate}"></th>
+            <th style="text-align:right" th:text="#{student.height}"></th>
+            <th style="text-align:right" th:text="#{student.weight}"></th>
+            <th  class="ps-5" style="text-align: center" th:text="#{page.actions}"></th>
+        </tr>
+        <tr th:each="student:${students}">
+            <td th:text="${student.studentId}"></td>
+            <td th:text="${student.surname}"></td>
+            <td th:text="${student.firstname}"></td>
+            <td style="text-align:center" th:text="${student.sex}"></td>
+            <td th:text="${#temporals.format(student.birthDate, 'dd.MM.yyyy')}"></td>
+            <td style="text-align:center" th:text="${student.height}"></td>
+            <td style="text-align:center" th:text="${student.weight}"></td>
+            <td class="d-flex justify-content-end">
+                <a class="btn btn-outline-primary btn-sm m-1"
+                   th:href="@{/mvc/students/{studentId}/studentSubjects(studentId=${student.studentId})}"
+                   th:text="#{page.show(#{studentSubject.caption.plural})}">
+                </a>
+                <a class="btn btn-outline-primary btn-sm m-1"
+                   th:href="@{/mvc/students/{studentId}/absences(studentId=${student.studentId})}"
+                   th:text="#{page.show(#{absence.caption.plural})}">
+                </a>
+                <a class="btn btn-outline-primary btn-sm m-1"
+                   th:href="@{/mvc/students/{studentId}/addresses(studentId=${student.studentId})}"
+                   th:text="#{page.show(#{address.caption.plural})}">
+                </a>
+                <a class="btn btn-outline-primary btn-sm m-1"
+                   th:href="@{/mvc/students/addEdit/{studentId}(studentId=${student.studentId})}"
+                   th:text="Bearbeiten">
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
